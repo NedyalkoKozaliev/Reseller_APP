@@ -20,32 +20,32 @@
             <!--               id="username" name="username"/>-->
             <!--        <small class="invalid-feedback text-danger">Username error message</small>-->
 
-            <input th:field="*{username}" th:errorclass="'is-invalid alert-danger'" type="text" class="form-control" id="username" name="username"/>
-            <small class="invalid-feedback text-danger">Username error message</small>
+            <input th:field="*{username}" th:errorclass="alert-danger" type="text" class="form-control" id="username" name="username"/>
+            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">Username error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="email" class="h4 mb-2">Email</label>
             </div>
-            <input th:field="*{email}" th:errorclass="'is-invalid alert-danger'" type="email" class="form-control" id="email" name="email"/>
-            <small class="invalid-feedback text-danger">Email error message</small>
+            <input th:field="*{email}" th:errorclass="alert-danger" type="email" class="form-control" id="email" name="email"/>
+            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">Email error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="password" class="h4 mb-2">Password</label>
             </div>
-            <input th:field="*{password}" th:errorclass="'is-invalid alert-danger'" type="password" class="form-control" id="password" name="password"/>
-            <small class="invalid-feedback text-danger">Password error message</small>
+            <input th:field="*{password}" th:errorclass="alert-danger" type="password" class="form-control" id="password" name="password"/>
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">Password error message</small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
             </div>
-            <input th:field="*{confirmPassword}" th:errorclass="'is-invalid alert-danger'" type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
-            <small class="invalid-feedback text-danger">Password error message</small>
+            <input th:field="*{confirmPassword}" th:errorclass="alert-danger" type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">Password error message</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">

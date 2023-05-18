@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
+    //private final MyOwnMapper myMapper;
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
     private final CurrentUser currentUser;

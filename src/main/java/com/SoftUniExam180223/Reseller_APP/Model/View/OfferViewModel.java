@@ -1,12 +1,13 @@
-package com.SoftUniExam180223.Reseller_APP.Model.Entity;
+package com.SoftUniExam180223.Reseller_APP.Model.View;
 
-import jakarta.persistence.*;
+import com.SoftUniExam180223.Reseller_APP.Model.Entity.Condition;
+import com.SoftUniExam180223.Reseller_APP.Model.Entity.User;
 
-@Entity
-@Table(name="offers")
-public class Offer extends BaseEntity{
+public class OfferViewModel {
 
-   private String description;
+    private Long id;
+
+    private String description;
 
     private Float price ;
 
@@ -14,10 +15,17 @@ public class Offer extends BaseEntity{
 
     private User seller;
 
-    public Offer() {
+    public OfferViewModel() {
     }
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -26,7 +34,6 @@ public class Offer extends BaseEntity{
         this.description = description;
     }
 
-    @Column(nullable = false)
     public Float getPrice() {
         return price;
     }
@@ -35,7 +42,6 @@ public class Offer extends BaseEntity{
         this.price = price;
     }
 
-    @ManyToOne
     public Condition getCondition() {
         return condition;
     }
@@ -44,7 +50,6 @@ public class Offer extends BaseEntity{
         this.condition = condition;
     }
 
-    @OneToOne
     public User getSeller() {
         return seller;
     }

@@ -11,12 +11,11 @@
 
         <!--    Example: Render errors messages with fields.errors - you can make it differently. -->
         <!--    <div th:each="error: ${#fields.errors()}" th:text="${error}" class="text-danger">Error messages</div>-->
-<th:block th:each="e:${#fields.errors()}" th:object="${e}">
-    <div class="text-danger">Error messages</div>
-</th:block>
+        <div th:each="e:${#fields.errors()}" th:object="${e}" th:text="${error}" class="text-danger">Error messages</div>
 
 
-        <div th:if="${notFound}" class="text-danger">Incorrect username or password!</div>
+
+        <div th:if="${isFound==false}" class="text-danger">Incorrect username or password!</div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">

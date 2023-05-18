@@ -45,7 +45,7 @@ public class User extends BaseEntity{
         this.email = email;
     }
 
-    @OneToMany
+    @OneToMany(mappedBy = "seller",fetch = FetchType.EAGER)
     public Set<Offer> getOffers() {
         return offers;
     }

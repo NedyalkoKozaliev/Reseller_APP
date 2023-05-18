@@ -8,4 +8,5 @@ public interface OfferService {
 
     void removeOffer(Long id);
 
+    void buyOffer(Long id);
 }

@@ -63,4 +63,10 @@ public class OfferController {
 
 
     }
+    @GetMapping("/buy/{id}")
+    public String buy(@PathVariable Long id) {
+        offerService.buyOffer(id);
+
+        return "redirect:/";
+    }
 }
