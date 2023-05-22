@@ -1,5 +1,6 @@
 package com.SoftUniExam180223.Reseller_APP.Model.Binding;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -12,7 +13,7 @@ public class UserLoginBindingModel {
     }
 
     @Size(min=3, max=20)
-    @NotNull
+    @NotBlank
     public String getUsername() {
         return username;
     }
@@ -21,7 +22,7 @@ public class UserLoginBindingModel {
         this.username = username;
     }
     @Size(min=3, max=20)
-    @NotNull
+    @NotBlank
     public String getPassword() {
         return password;
     }
