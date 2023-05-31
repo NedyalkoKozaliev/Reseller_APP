@@ -46,7 +46,7 @@ public class HomeController {
         int count=Others.size();
 
 
-        model.addAttribute("MyOffers",userRepository.findById(currentUser.getId()).get().getOffers());
+        model.addAttribute("MyOffers",offerRepository.findBySeller_Id(currentUser.getId()));
         model.addAttribute("BoughtOffers",userRepository.findById(currentUser.getId()).get().getBoughtOffers());
 
 

@@ -38,7 +38,7 @@ public class OfferController {
         if (!model.containsAttribute("offerAddBindingModel")) {
             model.addAttribute("offerAddBindingModel", new OfferAddBindingModel());
         }
-        return "product-add";
+        return "offer-add";
     }
 
     @PostMapping("/add")

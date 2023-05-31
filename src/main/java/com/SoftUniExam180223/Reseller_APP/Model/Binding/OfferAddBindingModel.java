@@ -26,17 +26,18 @@ public class OfferAddBindingModel {
         this.description = description;
     }
 
+    @Positive
+    @DecimalMin(value="0")
     public Float getPrice() {
         return price;
     }
 
-    @Positive
-    @DecimalMin(value="0")
+
     public void setPrice(Float price) {
         this.price = price;
     }
 
-    @NotBlank
+    @NotNull
     public ConditionNameEnum getCondition() {
         return condition;
     }

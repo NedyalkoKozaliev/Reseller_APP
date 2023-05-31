@@ -6,6 +6,7 @@ import com.SoftUniExam180223.Reseller_APP.Model.Service.UserServiceModel;
 import com.SoftUniExam180223.Reseller_APP.Repository.UserRepository;
 import com.SoftUniExam180223.Reseller_APP.Service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class UserServiceImpl implements UserService {
     private final CurrentUser currentUser;
     private final PasswordEncoder encoder;
 
+    @Autowired
     public UserServiceImpl(ModelMapper modelMapper, UserRepository userRepository, CurrentUser currentUser, PasswordEncoder encoder) {
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
@@ -41,11 +43,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserServiceModel findByUsernameAndPassword(String username, String password) {
-        return userRepository
-                .findByUsernameAndPassword(username, password)
-                .map(user->modelMapper.map(user,UserServiceModel.class))
-                .orElse(null);
+    public UserServiceModel findByNameAndPassword(String username, String password) {
+       // String pass= encoder.encode(password);
+
+        User user=userRepository.findByUsername(username).orElse(null);
+
+        if(user==null|| !encoder.matches(password, user.getPassword())){
+            return null;
+        }
+        return modelMapper.map(user,UserServiceModel.class);
+
+//        return userRepository
+//                .findByUsernameAndPassword(username, pass)
+//                .map(user->modelMapper.map(user,UserServiceModel.class))
+//                .orElse(null);
+
+
+//        User user = this.getUserByUsername(username);
+//
+//        if (user == null) {
+//            return false;
+//        }
+//
+//        return encoder.matches(password, user.getPassword());
+//    }
 
     }
 

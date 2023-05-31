@@ -12,13 +12,7 @@ public class UserRegisterBindingModel {
 
     private String confirmPassword;
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
 
     public UserRegisterBindingModel() {
     }
@@ -43,12 +37,22 @@ public class UserRegisterBindingModel {
         this.password = password;
     }
     @Email
-    @NotNull
+    @NotBlank
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @NotBlank
+    @Size(min=3, max=20)
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }
