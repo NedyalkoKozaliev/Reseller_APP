@@ -5,6 +5,7 @@ import com.SoftUniExam180223.Reseller_APP.Current.CurrentUser;
 import com.SoftUniExam180223.Reseller_APP.Model.View.OfferViewModel;
 import com.SoftUniExam180223.Reseller_APP.Repository.OfferRepository;
 import com.SoftUniExam180223.Reseller_APP.Repository.UserRepository;
+import com.SoftUniExam180223.Reseller_APP.Service.OfferService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +22,14 @@ public class HomeController {
     private final OfferRepository offerRepository;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final OfferService offerService;
 
-    public HomeController(CurrentUser currentUser, OfferRepository offerRepository, UserRepository userRepository, ModelMapper modelMapper) {
+    public HomeController(CurrentUser currentUser, OfferRepository offerRepository, UserRepository userRepository, ModelMapper modelMapper, OfferService offerService) {
         this.currentUser = currentUser;
         this.offerRepository = offerRepository;
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.offerService = offerService;
     }
     // private final ProductService productService;
 
@@ -39,15 +42,18 @@ public class HomeController {
 
         }
 
-        String Logged=userRepository.findById(currentUser.getId()).get().getUsername();
-        List<OfferViewModel> Others=offerRepository.findAllByIdNot(currentUser.getId()).stream().
+        String Logged=currentUser.getUsername();
+        List<OfferViewModel> Others=offerRepository.findAllBySeller_IdNot(currentUser.getId()).stream().
                 map(offer -> modelMapper.map(offer,OfferViewModel.class)).collect(Collectors.toList());
+        List<OfferViewModel> myOffers=offerService.findMyOffers(currentUser.getId());
+        List<OfferViewModel> bought=userRepository.findById(currentUser.getId()).
+                stream().map(offer->modelMapper.map(offer,OfferViewModel.class)).toList();
 
         int count=Others.size();
 
 
-        model.addAttribute("MyOffers",offerRepository.findBySeller_Id(currentUser.getId()));
-        model.addAttribute("BoughtOffers",userRepository.findById(currentUser.getId()).get().getBoughtOffers());
+        model.addAttribute("MyOffers",myOffers);
+        model.addAttribute("BoughtOffers",bought);
 
 
         model.addAttribute("other",Others);

@@ -62,7 +62,7 @@
                                     <table>
                                         <tr>
                                             <td style="width: 35%">
-                                                <a th:text="|*{seller.name} sells:|">{sellersUsername} sells:</a>
+                                                <a th:text="|*{seller.username} sells:|">{sellersUsername} sells:</a>
                                             </td>
                                             <td>
                                                 <a th:text="|*{description}|">{offerDescription}</a>
@@ -80,7 +80,7 @@
                                                 <a th:text="|Price: *{price}|">Price: {offerPrice} €</a>
                                             </td>
                                             <td>
-                                                <a class="ml-3 text-danger" th:href="@{/offer/buy/{id}(id=*{id})}">
+                                                <a class="ml-3 text-danger" th:href="@{/offers/buy/{id}(id=*{id})}">
                                                     <img src="/img/buy.png" height="35px"></a>
                                             </td>
                                         </tr>

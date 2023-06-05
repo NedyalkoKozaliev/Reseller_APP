@@ -18,7 +18,7 @@
         </th:block>
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav row">
-                <th:block th:if="${@currentUser.id==null}"></th:block>
+                <th:block th:if="${@currentUser.id==null}">
                 <li class="nav-item col-md-4">
                     <a class="nav-link text-primary active h5 text-stroke" href="/users/login">Login</a>
                 </li>
