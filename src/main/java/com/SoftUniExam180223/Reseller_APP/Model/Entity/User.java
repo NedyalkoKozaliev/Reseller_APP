@@ -54,7 +54,7 @@ public class User extends BaseEntity{
         this.offers = offers;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
     public Set<Offer> getBoughtOffers() {
         return boughtOffers;
     }

@@ -49,9 +49,10 @@ public class OfferController {
             redirectAttributes.addFlashAttribute("org.springFramework.validation.BindingResult.offerAddBindingModel", bindingResult);
             return "redirect:add";
         }
-        offerService.addOffer(modelMapper.map(offerAddBindingModel, OfferServiceModel.class));
+//        offerService.addOffer(modelMapper.map(offerAddBindingModel, OfferServiceModel.class));
+        offerService.addOffer(offerAddBindingModel);
 
-        return "home";
+        return "redirect:/";
 
     }
 

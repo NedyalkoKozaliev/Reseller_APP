@@ -1,6 +1,7 @@
 package com.SoftUniExam180223.Reseller_APP.Service.Impl;
 
 import com.SoftUniExam180223.Reseller_APP.Current.CurrentUser;
+import com.SoftUniExam180223.Reseller_APP.Model.Binding.OfferAddBindingModel;
 import com.SoftUniExam180223.Reseller_APP.Model.Entity.Offer;
 import com.SoftUniExam180223.Reseller_APP.Model.Entity.User;
 import com.SoftUniExam180223.Reseller_APP.Model.Service.OfferServiceModel;
@@ -36,9 +37,12 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public void addOffer(OfferServiceModel offerServiceModel) {
-        Offer offer=modelMapper.map(offerServiceModel,Offer.class);
-        offer.setCondition (conditionService.findByConditionNameEnum(offerServiceModel.getCondition()));
+    public void addOffer(OfferAddBindingModel offerAddBindingModel) {
+//        Offer offer=modelMapper.map(offerAddBindingModel,Offer.class);
+        Offer offer=new Offer();
+        offer.setDescription(offerAddBindingModel.getDescription());
+        offer.setPrice(offerAddBindingModel.getPrice());
+        offer.setCondition(conditionService.findByConditionNameEnum(offerAddBindingModel.getCondition()));
         offer.setSeller(findUserById(currentUser.getId()));
        offerRepository.save(offer);
     }
@@ -48,26 +52,50 @@ public class OfferServiceImpl implements OfferService {
     }
     @Override
     public void removeOffer(Long id) {
-        offerRepository
-                .deleteById(id);
-    }
+
+            offerRepository
+                    .deleteById(id);
+        }
+
 
     @Override
     public void buyOffer(Long id) {
         Offer offer=offerRepository.findById(id).orElse(null);
 
-       // User seller=offer.getSeller();
         User current=userRepository.findById(currentUser.getId()).orElse(null);
+//        if(offer!=null){
+//            User seller=offer.setSeller(null);}
+
+if(current!=null){
+    current.getBoughtOffers().add(offer);
+    userRepository.save(current);
+
+}
 
 
-            current.getBoughtOffers().add(offer);
 
     }
 
     @Override
     public List<OfferViewModel> findMyOffers(Long id) {
-      return userRepository.findById(id).get().getOffers().stream()
-                .map(offer -> modelMapper.map(offer,OfferViewModel.class)).collect(Collectors.toList());
+
+    User user= userRepository.findById(id).orElse(null);
+    if (user==null){
+        return null;
+    }
+
+        return user.getOffers().stream().map(offer->modelMapper.map(offer,OfferViewModel.class)).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<OfferViewModel> findBoughtOffers(Long id) {
+    User user=userRepository.findById(id).orElse(null);
+    if(user==null){
+        return null;
+    }
+
+    return user.getBoughtOffers().stream().map(offer->modelMapper.map(offer,OfferViewModel.class)).collect(Collectors.toList());
 
     }
 }

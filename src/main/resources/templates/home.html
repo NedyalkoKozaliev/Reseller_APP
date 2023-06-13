@@ -19,10 +19,10 @@
                                     <img class="mr-2 " src="/img/etiquette.png" alt="Etiquette" width="35px"
                                          height="35px">
                                 </td>
-                                <td style="width: 5%" class="bg-info" th:text="|*{condition}|"></td>
+                                <td style="width: 5%" class="bg-info" th:text="|*{condition.conditionName.name()}|"></td>
                                 <td class="bg-primary" style="width: 15%" th:text="|*{price} €|"></td>
                                 <td th:text="*{description}"></td>
-                                <td style="width: 15%"><a class="btn-danger btn" th:href="@{/offer/remove/{id}(id=*{id})}">Remove</a>
+                                <td style="width: 15%"><a class="btn-danger btn" th:href="@{/offers/remove/{id}(id=*{id})}">Remove</a>
                                 </td>
                             </tr>
                         </table>
@@ -74,7 +74,7 @@
                                     <table>
                                         <tr>
                                             <td style="width: 40%">
-                                                <a th:text="|Condition: *{condition}|">Condition: {offerCondition}</a>
+                                                <a th:text="|Condition: *{condition.conditionName.name()}|">Condition: {offerCondition}</a>
                                             </td>
                                             <td class="text-primary" style="width: 40%">
                                                 <a th:text="|Price: *{price}|">Price: {offerPrice} €</a>
