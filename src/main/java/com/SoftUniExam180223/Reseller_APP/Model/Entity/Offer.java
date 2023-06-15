@@ -14,6 +14,8 @@ public class Offer extends BaseEntity{
 
     private User seller;
 
+
+
     public Offer() {
     }
 

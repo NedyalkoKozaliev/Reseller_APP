@@ -61,18 +61,23 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public void buyOffer(Long id) {
         Offer offer=offerRepository.findById(id).orElse(null);
+if(offer!=null) {
 
-        User current=userRepository.findById(currentUser.getId()).orElse(null);
-//        if(offer!=null){
-//            User seller=offer.setSeller(null);}
-
-if(current!=null){
-    current.getBoughtOffers().add(offer);
+    User current = offer.getSeller();
+    current.getOffers().remove(offer);
+    offer.setSeller(null);
+    offerRepository.save(offer);
     userRepository.save(current);
 
+
+    User buyer= userRepository.findById(currentUser.getId()).orElse(null);
+
+    if (buyer != null) {
+        buyer.getBoughtOffers().add(offer);
+
+    userRepository.save(buyer);
+    }
 }
-
-
 
     }
 
