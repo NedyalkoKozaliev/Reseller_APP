@@ -1,5 +1,7 @@
 package com.SoftUniExam180223.Reseller_APP.Model.Entity;
 
+import com.SoftUniExam180223.Reseller_APP.Validation.annotation.UniqueEmail;
+import com.SoftUniExam180223.Reseller_APP.Validation.annotation.UniqueUsername;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -8,8 +10,12 @@ import java.util.Set;
 @Table(name="users")
 public class User extends BaseEntity{
 
+@UniqueUsername
   private String username;
+
   private String password;
+
+  @UniqueEmail
    private String email;
    private Set<Offer> offers;
 

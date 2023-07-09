@@ -7,13 +7,14 @@ import com.SoftUniExam180223.Reseller_APP.Service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -23,13 +24,23 @@ public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
+//    @Autowired
+////    @Qualifier("userValidator")
+//    private Validator validator;
+//
+//    @InitBinder
+//    private void initBinder(WebDataBinder binder) {
+//        binder.setValidator(validator);
+//    }
+
+
     public UserController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
     }
 
 
-    @GetMapping("/register") //--> select(call) register page
+    @GetMapping("/register")
     public String register(Model model){
         if(!model.containsAttribute("userRegisterBindingModel")){
             model.addAttribute("userRegisterBinding",new UserRegisterBindingModel());
@@ -52,7 +63,7 @@ public class UserController {
         return "redirect:login";
     }
 
-    @GetMapping("/login") //====>select(call) login page
+    @GetMapping("/login")
     public String login(Model model){
         if(!model.containsAttribute("isFound")){
             model.addAttribute("isFound", true);
