@@ -1,5 +1,6 @@
 package com.SoftUniExam180223.Reseller_APP.Validation;
 
+import com.SoftUniExam180223.Reseller_APP.Repository.UserRepository;
 import com.SoftUniExam180223.Reseller_APP.Service.Impl.UserServiceImpl;
 import com.SoftUniExam180223.Reseller_APP.Validation.annotation.UniqueEmail;
 import jakarta.validation.ConstraintValidator;
@@ -7,18 +8,18 @@ import jakarta.validation.ConstraintValidatorContext;
 
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
 
-    private final UserServiceImpl userService;
+
+private final UserRepository userRepository;
 
 
-
-    public UniqueEmailValidator(UserServiceImpl userService) {
-        this.userService = userService;
+    public UniqueEmailValidator(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
-
-
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return this.userService.findUserByEmail(value) == null;
+
+    return userRepository.findByEmail(value).isEmpty();
+
     }
 }

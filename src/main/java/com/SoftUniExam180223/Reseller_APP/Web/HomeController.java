@@ -31,7 +31,7 @@ public class HomeController {
         this.modelMapper = modelMapper;
         this.offerService = offerService;
     }
-    // private final ProductService productService;
+
 
 
     @GetMapping("/")

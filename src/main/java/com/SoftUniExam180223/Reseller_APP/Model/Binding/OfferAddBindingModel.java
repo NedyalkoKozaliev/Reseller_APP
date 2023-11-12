@@ -7,17 +7,19 @@ import jakarta.validation.constraints.*;
 
 public class OfferAddBindingModel {
 
+    @Size(min=2,max=50, message = "Description length must be between 2 and 50 characters.")
+    @NotEmpty(message = "Description could not be empty.")
     private String description;
-
+    @Positive(message = "Price must be positive number.")
+    @DecimalMin(value="0")
     private Float price ;
-
+    @NotNull(message = "You must select condition.")
     private ConditionNameEnum condition;
 
     public OfferAddBindingModel() {
     }
 
-    @Size(min=2,max=50)
-    @NotNull
+
     public String getDescription() {
         return description;
     }
@@ -26,8 +28,7 @@ public class OfferAddBindingModel {
         this.description = description;
     }
 
-    @Positive
-    @DecimalMin(value="0")
+
     public Float getPrice() {
         return price;
     }
@@ -37,7 +38,7 @@ public class OfferAddBindingModel {
         this.price = price;
     }
 
-    @NotNull
+
     public ConditionNameEnum getCondition() {
         return condition;
     }

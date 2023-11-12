@@ -42,8 +42,6 @@ public class ConditionServiceImpl implements ConditionService {
     public Condition findByConditionNameEnum(ConditionNameEnum conditionNameEnum) {
         return conditionRepository.findByConditionName(conditionNameEnum).orElse(null);
 
-//        return conditionRepository
-//                .findByConditionName(conditionNameEnum)
-//                .orElse(null);
+
     }
 }

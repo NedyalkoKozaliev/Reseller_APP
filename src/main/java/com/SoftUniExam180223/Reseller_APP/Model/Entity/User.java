@@ -10,12 +10,12 @@ import java.util.Set;
 @Table(name="users")
 public class User extends BaseEntity{
 
-@UniqueUsername
+
   private String username;
 
   private String password;
 
-  @UniqueEmail
+
    private String email;
    private Set<Offer> offers;
 

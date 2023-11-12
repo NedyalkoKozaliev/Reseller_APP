@@ -1,15 +1,23 @@
 package com.SoftUniExam180223.Reseller_APP.Model.Binding;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.SoftUniExam180223.Reseller_APP.Validation.annotation.UniqueEmail;
+import com.SoftUniExam180223.Reseller_APP.Validation.annotation.UniqueUsername;
+import jakarta.validation.constraints.*;
 
 public class UserRegisterBindingModel {
+    @UniqueUsername(message = "Username should be unique.")
+    @NotEmpty(message = "Username could not be blank.")
+    @Size(min=3, max=20, message = "Username length must be between 3 and 20 characters.")
     private String username;
+    @NotEmpty(message = "Password could not be blank.")
+    @Size(min=3, max=20, message = "Password length must be between 3 and 20 characters.")
     private String password;
+    @UniqueEmail
+    @NotEmpty(message = "Email could not be blank.")
+    @Email(message = "Please provide valid email address.")
     private String email;
-
+    @NotEmpty(message = "Field could not be blank.")
+    @Size(min=3, max=20)
     private String confirmPassword;
 
 
@@ -17,8 +25,8 @@ public class UserRegisterBindingModel {
     public UserRegisterBindingModel() {
     }
 
-    @Size(min=3, max=20)
-    @NotNull
+
+
     public String getUsername() {
         return username;
     }
@@ -27,8 +35,7 @@ public class UserRegisterBindingModel {
         this.username = username;
     }
 
-    @Size(min=3, max=20)
-    @NotNull
+
     public String getPassword() {
         return password;
     }
@@ -36,8 +43,7 @@ public class UserRegisterBindingModel {
     public void setPassword(String password) {
         this.password = password;
     }
-    @Email
-    @NotBlank
+
     public String getEmail() {
         return email;
     }
@@ -46,8 +52,7 @@ public class UserRegisterBindingModel {
         this.email = email;
     }
 
-    @NotBlank
-    @Size(min=3, max=20)
+
     public String getConfirmPassword() {
         return confirmPassword;
     }

@@ -6,10 +6,10 @@ import jakarta.validation.Payload;
 
 import java.lang.annotation.*;
 
-@Documented
-@Constraint(validatedBy = UniqueEmailValidator.class)
-@Target({ElementType.METHOD, ElementType.FIELD})
+
 @Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+@Constraint(validatedBy = UniqueEmailValidator.class)
 public @interface UniqueEmail {
     String message() default "Email already exist";
 

@@ -24,14 +24,7 @@ public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-//    @Autowired
-////    @Qualifier("userValidator")
-//    private Validator validator;
-//
-//    @InitBinder
-//    private void initBinder(WebDataBinder binder) {
-//        binder.setValidator(validator);
-//    }
+
 
 
     public UserController(UserService userService, ModelMapper modelMapper) {
@@ -65,6 +58,10 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(Model model){
+        if(!model.containsAttribute("userLoginBindingModel")){
+            model.addAttribute("userLoginBindingModel",new UserLoginBindingModel());
+        }
+
         if(!model.containsAttribute("isFound")){
             model.addAttribute("isFound", true);
         }
@@ -76,7 +73,7 @@ public class UserController {
     public String loginConfirmation(@Valid UserLoginBindingModel userLoginBindingModel, BindingResult bindingResult,
                                     RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("UserLoginBindingModel",userLoginBindingModel );
+            redirectAttributes.addFlashAttribute("userLoginBindingModel",userLoginBindingModel );
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
 
             return "redirect:login";
