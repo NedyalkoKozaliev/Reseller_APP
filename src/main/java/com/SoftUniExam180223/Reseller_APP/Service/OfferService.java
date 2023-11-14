@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface OfferService {
 
-    void addOffer(OfferAddBindingModel offerAddBindingModel);
+    void addOffer(OfferServiceModel offerServiceModel);
 
     void removeOffer(Long id);
 

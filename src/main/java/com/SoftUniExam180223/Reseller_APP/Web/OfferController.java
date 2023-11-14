@@ -7,6 +7,7 @@ import com.SoftUniExam180223.Reseller_APP.Model.Binding.UserRegisterBindingModel
 import com.SoftUniExam180223.Reseller_APP.Model.Service.OfferServiceModel;
 import com.SoftUniExam180223.Reseller_APP.Service.OfferService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +29,10 @@ public class OfferController {
         this.currentUser = currentUser;
     }
 
-
+    @ModelAttribute
+    public OfferAddBindingModel offerAddBindingModel(){
+        return new OfferAddBindingModel();
+    }
 
     @GetMapping("/add")
     public String add(Model model) {
@@ -47,11 +51,9 @@ public class OfferController {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("offerAddBindingModel", offerAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springFramework.validation.BindingResult.offerAddBindingModel", bindingResult);
-            return "redirect:add";
+            return "offer-add";
         }
-//        offerService.addOffer(modelMapper.map(offerAddBindingModel, OfferServiceModel.class));
-        offerService.addOffer(offerAddBindingModel);
-
+      offerService.addOffer(modelMapper.map(offerAddBindingModel, OfferServiceModel.class));
         return "redirect:/";
 
     }
@@ -70,8 +72,5 @@ public class OfferController {
 
         return "redirect:/";
     }
-    @ModelAttribute
-    public OfferAddBindingModel offerAddBindingModel(){
-        return new OfferAddBindingModel();
-    }
+
 }

@@ -6,6 +6,7 @@ import com.SoftUniExam180223.Reseller_APP.Model.Entity.Offer;
 import com.SoftUniExam180223.Reseller_APP.Model.Entity.User;
 import com.SoftUniExam180223.Reseller_APP.Model.Service.OfferServiceModel;
 import com.SoftUniExam180223.Reseller_APP.Model.View.OfferViewModel;
+import com.SoftUniExam180223.Reseller_APP.Repository.ConditionRepository;
 import com.SoftUniExam180223.Reseller_APP.Repository.OfferRepository;
 import com.SoftUniExam180223.Reseller_APP.Repository.UserRepository;
 import com.SoftUniExam180223.Reseller_APP.Service.ConditionService;
@@ -37,13 +38,10 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public void addOffer(OfferAddBindingModel offerAddBindingModel) {
-//        Offer offer=modelMapper.map(offerAddBindingModel,Offer.class);
-        Offer offer=new Offer();
-        offer.setDescription(offerAddBindingModel.getDescription());
-        offer.setPrice(offerAddBindingModel.getPrice());
-        offer.setCondition(conditionService.findByConditionNameEnum(offerAddBindingModel.getCondition()));
+    public void addOffer(OfferServiceModel offerServiceModel) {
+        Offer offer=modelMapper.map(offerServiceModel,Offer.class);
         offer.setSeller(findUserById(currentUser.getId()));
+        offer.setCondition(conditionService.findByConditionNameEnum(offerServiceModel.getCondition()));
        offerRepository.save(offer);
     }
 
