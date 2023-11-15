@@ -41,7 +41,7 @@
                 <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
             </div>
             <input th:field="*{confirmPassword}" th:errorclass="'is-invalid alert-danger'" type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
-            <small th:each="err:${#fields.errors('password')}" th:text="${err}" class="invalid-feedback text-danger">Password error message</small>
+            <small th:each="err:${#fields.errors('confirmPassword')}" th:text="${err}" class="invalid-feedback text-danger">Password error message</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">

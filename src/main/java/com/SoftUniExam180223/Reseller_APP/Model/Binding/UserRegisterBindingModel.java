@@ -1,9 +1,16 @@
 package com.SoftUniExam180223.Reseller_APP.Model.Binding;
 
+import com.SoftUniExam180223.Reseller_APP.Validation.annotation.FieldMatcher;
 import com.SoftUniExam180223.Reseller_APP.Validation.annotation.UniqueEmail;
 import com.SoftUniExam180223.Reseller_APP.Validation.annotation.UniqueUsername;
 import jakarta.validation.constraints.*;
 
+@FieldMatcher(
+        first = "password",
+        second ="confirmPassword",
+        message = "Passwords should match."
+
+)
 public class UserRegisterBindingModel {
     @UniqueUsername(message = "Username should be unique.")
     @NotEmpty(message = "Username could not be blank.")

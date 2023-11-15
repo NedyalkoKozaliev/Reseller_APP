@@ -53,20 +53,7 @@ public class UserServiceImpl implements UserService {
         }
         return modelMapper.map(user,UserServiceModel.class);
 
-//        return userRepository
-//                .findByUsernameAndPassword(username, pass)
-//                .map(user->modelMapper.map(user,UserServiceModel.class))
-//                .orElse(null);
 
-
-//        User user = this.getUserByUsername(username);
-//
-//        if (user == null) {
-//            return false;
-//        }
-//
-//        return encoder.matches(password, user.getPassword());
-//    }
 
     }
 
@@ -83,7 +70,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByEmail(String value) {
         return userRepository.findByEmail(value).orElseThrow(null);
-        // return userRepository.findByEmail(value).orElse(null);
+
     }
 
 }

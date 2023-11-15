@@ -44,7 +44,8 @@ public class UserController {
     @PostMapping("/register")
     public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()|| !userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())){
+
+        if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userRegisterBindingModel",userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel",bindingResult);
             return "redirect:register";

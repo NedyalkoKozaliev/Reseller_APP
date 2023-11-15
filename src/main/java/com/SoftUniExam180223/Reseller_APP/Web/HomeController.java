@@ -47,8 +47,7 @@ public class HomeController {
                 map(offer -> modelMapper.map(offer,OfferViewModel.class)).collect(Collectors.toList());
         List<OfferViewModel> myOffers=offerService.findMyOffers(currentUser.getId());
         List<OfferViewModel> bought=offerService.findBoughtOffers(currentUser.getId());
-//        List<OfferViewModel> bought=userRepository.findById(currentUser.getId()).
-//                stream().map(offer->modelMapper.map(offer,OfferViewModel.class)).toList();
+
 
         int count=Others.size();
 

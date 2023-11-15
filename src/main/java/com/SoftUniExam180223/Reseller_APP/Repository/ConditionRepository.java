@@ -12,7 +12,7 @@ public interface ConditionRepository extends JpaRepository<Condition, Long> {
     Optional<Condition> findByConditionName(ConditionNameEnum conditionName);
 
 
-//    Optional<Condition> findByConditionName(ConditionNameEnum conditionNameEnum);
+
 
 
 
